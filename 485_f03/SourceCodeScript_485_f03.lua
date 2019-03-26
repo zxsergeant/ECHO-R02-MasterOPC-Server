@@ -1,3 +1,5 @@
+-- Îïğîñ óñòğîéñòâà â ñåòè MODBUS ïî êîìàíäå 03 (äëÿ ÏÎ âåğñèè 3.5 è âûøå) äëÿ MasterOPC Universal Modbus Server
+
 -- Initialization
 function OnInit()
 end
@@ -12,7 +14,7 @@ local Pu, timestamp = {}
 value,value_qual = server.ReadCurrentTag ();
 
 
--- ## Ğ¿Ğ¾Ğ»ÑƒÑ‡Ğ°ĞµĞ¼ Ğ¼Ğ°ÑÑˆÑ‚Ğ°Ğ±Ğ¸Ñ€ÑƒÑÑ‰Ğ¸Ğ¹ Ğ¼Ğ½Ğ¾Ğ¶Ğ¸Ñ‚ĞµĞ»ÑŒ Ğ¾Ğ±ÑŠÑ‘Ğ¼Ğ°
+-- ## ïîëó÷àåì ìàñøòàáèğóşùèé ìíîæèòåëü îáú¸ìà
 err,Pu = modbus.ReadHoldingRegistersAsInt16( 9, 1, true,"10325476" );
 if err==true then
 server.message( "Connection error");
@@ -23,7 +25,7 @@ doublebyte = Pu[1];
 multiplier = bit.BitRshift ( doublebyte, 8 );
 server.Message( "multiplier=",multiplier );
 
--- ## Ğ¼Ğ°ÑÑˆÑ‚Ğ°Ğ±Ğ¸Ñ€ÑƒĞµĞ¼ Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ Ğ¾Ğ±ÑŠÑ‘Ğ¼Ğ°
+-- ## ìàñøòàáèğóåì çíà÷åíèå îáú¸ìà
 if value_qual==OPC_QUALITY_GOOD and multiplier>=0 and multiplier<=5 then
 A = (10^ (multiplier - 3 ));
 value = value * A;
@@ -33,7 +35,7 @@ else server.WriteCurrentTag( 0, OPC_QUALITY_BAD );
 end;
 
 
--- Ğ¿Ğ¾Ğ»ÑƒÑ‡Ğ°ĞµĞ¼ ĞºĞ¾Ğ´ Ğ½ĞµĞ¸ÑĞ¿Ñ€Ğ°Ğ²Ğ½Ğ¾ÑÑ‚Ğ¸, Ğ·Ğ°Ğ¿Ğ¸ÑÑ‹Ğ²Ğ°ĞµĞ¼ ĞµĞ³Ğ¾ Ğ² ÑĞ²Ğ¾Ñ Ğ¿ĞµÑ€ĞµĞ¼ĞµĞ½Ğ½ÑƒÑ
+-- ïîëó÷àåì êîä íåèñïğàâíîñòè, çàïèñûâàåì åãî â ñâîş ïåğåìåííóş
 doublebyte=bit.BitAnd( doublebyte, 255 );
 server.Message( "ErrCode=",doublebyte );
 server.WriteTagByRelativeName( "dev_status",doublebyte,value_qual );
