@@ -1,7 +1,7 @@
 {
 	"node":	{
 		"Category":	"Device",
-		"NameInTree":	"ЭХО-Р02 485 (f03)",
+		"NameInTree":	"Р­РҐРћ-Р 02 485 (f03)",
 		"Enabled":	"False",
 		"TypeDevice":	"MODBUS",
 		"SubTypeDevice":	"MODBUS",
@@ -47,7 +47,7 @@
 		"RZ09":	"False",
 		"WaitingTimeout":	"4",
 		"Level":	"2",
-		"Comment":	"Опрос устройства в сети MODBUS по команде 03 (для ПО версии 3.5 и выше)",
+		"Comment":	"РћРїСЂРѕСЃ СѓСЃС‚СЂРѕР№СЃС‚РІР° РІ СЃРµС‚Рё MODBUS РїРѕ РєРѕРјР°РЅРґРµ 03 (РґР»СЏ РџРћ РІРµСЂСЃРёРё 3.5 Рё РІС‹С€Рµ)",
 		"node":	{
 			"Category":	"Teg",
 			"NameInTree":	"dev_status",
@@ -87,7 +87,7 @@
 			"IEC104_Address":	"1",
 			"IEC104_Reason":	"true",
 			"IEC104_Write":	"true",
-			"Comment":	"Код неисправности"
+			"Comment":	"РљРѕРґ РЅРµРёСЃРїСЂР°РІРЅРѕСЃС‚Рё"
 		},
 		"node":	{
 			"Category":	"Teg",
@@ -128,7 +128,7 @@
 			"IEC104_Address":	"1",
 			"IEC104_Reason":	"true",
 			"IEC104_Write":	"true",
-			"Comment":	"Уровень, м"
+			"Comment":	"РЈСЂРѕРІРµРЅСЊ, Рј"
 		},
 		"node":	{
 			"Category":	"Teg",
@@ -169,7 +169,7 @@
 			"IEC104_Address":	"1",
 			"IEC104_Reason":	"true",
 			"IEC104_Write":	"true",
-			"Comment":	"Расход, м3/час"
+			"Comment":	"Р Р°СЃС…РѕРґ, Рј3/С‡Р°СЃ"
 		},
 		"node":	{
 			"Category":	"Teg",
@@ -210,7 +210,7 @@
 			"IEC104_Address":	"1",
 			"IEC104_Reason":	"true",
 			"IEC104_Write":	"true",
-			"Comment":	"Отмасштабированное значение объёма  м3"
+			"Comment":	"РћС‚РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РѕР±СЉС‘РјР°  Рј3"
 		},
 		"node":	{
 			"Category":	"Teg",
@@ -251,7 +251,7 @@
 			"IEC104_Address":	"1",
 			"IEC104_Reason":	"true",
 			"IEC104_Write":	"true",
-			"Comment":	"Время учета в минутах"
+			"Comment":	"Р’СЂРµРјСЏ СѓС‡РµС‚Р° РІ РјРёРЅСѓС‚Р°С…"
 		},
 		"node":	{
 			"Category":	"Teg",
@@ -292,7 +292,7 @@
 			"IEC104_Address":	"1",
 			"IEC104_Reason":	"true",
 			"IEC104_Write":	"true",
-			"Comment":	"Текущие значения даты и времени"
+			"Comment":	"РўРµРєСѓС‰РёРµ Р·РЅР°С‡РµРЅРёСЏ РґР°С‚С‹ Рё РІСЂРµРјРµРЅРё"
 		}
 	}
 }
