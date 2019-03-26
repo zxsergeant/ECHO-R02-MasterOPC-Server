@@ -1,5 +1,3 @@
--- Опрос устройства в сети MODBUS по команде 03 (для ПО версии 3.5 и выше) для MasterOPC Universal Modbus Server
-
 -- Initialization
 function OnInit()
 end
