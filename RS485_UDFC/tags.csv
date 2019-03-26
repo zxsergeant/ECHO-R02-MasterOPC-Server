@@ -1,0 +1,8 @@
+Name;Region;Address;DataType;Access;ByteOrder;Comment
+EcoArchives{s}Archive_Q_hours;SERVER_ONLY;0;int16;ReadOnly;10325476;Почасовой HDA архив (настройка в свойствах подустройства)
+EcoArchives{s}Archive_Q_day;SERVER_ONLY;3;int16;ReadOnly;10325476;Посуточный HDA архив (настройка в свойствах подустройства)
+Status;SERVER_ONLY;0;int16;ReadOnly;10325476;Код неисправности прибора (0-неисправностей нет)
+H;SERVER_ONLY;0;int16;ReadOnly;10325476;Уровень, м
+Q;SERVER_ONLY;1;int16;ReadOnly;10325476;Расход, м3/час
+U;SERVER_ONLY;2;int16;ReadOnly;10325476;Отмасштабированное значение объёма м3
+Working_time;SERVER_ONLY;3;int16;ReadOnly;10325476;Время учета в минутах
