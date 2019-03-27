@@ -33,14 +33,12 @@ function OnAfterReading()
     server.WriteTagByRelativeName("H",dest[1],OPC_QUALITY_GOOD);
     server.WriteTagByRelativeName("Q",dest[2]*3600,OPC_QUALITY_GOOD);
     --масштабируем значение объёма
-    --if dest[5]>=0 and dest[5]<=5 then
     dest[5] = (10^ (dest[5] - 3 ));
     dest[3] = dest[3] * dest[5];
     server.WriteTagByRelativeName("U",dest[3],OPC_QUALITY_GOOD);
     server.WriteTagByRelativeName("Working_time",dest[4],OPC_QUALITY_GOOD);
     --end;
   else
-    --server.WriteCurrentTag(0,OPC_QUALITY_BAD);
     server.WriteTagByRelativeName("Status",0,OPC_QUALITY_BAD);
     server.WriteTagByRelativeName("H",0,OPC_QUALITY_BAD);
     server.WriteTagByRelativeName("Q",0,OPC_QUALITY_BAD);
