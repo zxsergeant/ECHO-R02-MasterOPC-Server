@@ -2,10 +2,7 @@
 -- Функция #68 приёма n строк почасового архива, начиная с i-й
 ---------------------------------------------------------------------------
 function ReadECHO68(nlin)
-  --server.Message( "Start");
   local send={}; --массив отправляемых чисел
-  --local Address = server.GetCurrentDeviceAddress( );
-
   table.insert(send,Address); --адрес
   table.insert(send,0x68); --функция
   table.insert(send,0x00); --1-й байт-параметр – ст. байт числа i;
@@ -31,19 +28,12 @@ function ReadECHO68(nlin)
     n=n+1;
     --условие выхода - корректный ответ или превышение запросов
   until err>=0 or n>=server.GetCurrentDeviceRetry()
-  --server.Message( " err=",err," len=",len);
-  --server.Message( "func err=",err);
   if err>=0 then
-    --local multipler=server.ReadTagByRelativeName("multipler");
     local err1,multipler=GetMultipler();
     nlin1=nlin;
     local a=4;
     repeat
       dest[a]=dest[a]*multipler;
-
-      --server.Message( " значение=",dest[a]," a=",a);
-      --server.Message( " data=",2000+FromBCD(dest[a+4]),".",FromBCD(dest[a+3]),".",FromBCD(dest[a+2]),".",FromBCD(dest[a+1]));
-
       a=a+5;
       nlin1=nlin1-1;
     until nlin1<=0
@@ -90,8 +80,6 @@ function GetMultipler()
   --обработка результатов
   if err>=0 then
     dest[8] = (10^ (dest[8] - 3 ));
-    --dest[6] = dest[6] * dest[8];
-    --server.Message("MultiFunc=",dest[8]);
     return true,dest[8];
   else
     return false,0; --запрос некорректен, возвращаем соответствующий флаг
@@ -117,49 +105,34 @@ end
 ---------------------------------------------------------------------------
 function OnRead()
   local errok;--={}; --массив полученных чисел
-  --server.Message( "...reading");
   if read==false
   then do
     local dest={}; --массив полученных чисел
     local deep=server.ReadSubDeviceExtProperty("Часов, почасового архива");
-    --
     errok,dest=ReadECHO68(deep); --Запрос данных с прибора
-    --
     if errok<=0 then return;
     end;
-
     local a=4;
     repeat
-      --
       Err,timesec = time.PackTime(2000+FromBCD(dest[a+4]),FromBCD(dest[a+3]),FromBCD(dest[a+2]),FromBCD(dest[a+1]),00,00);
       ts = time.TimeToTimeStamp(timesec,0);
       server.WriteCurrentTagToHda(dest[a],OPC_QUALITY_GOOD,ts)
       a=a+5;
       deep=deep-1;
     until deep<=0
-    --
-    --server.Message( "then");
     read=true;
     end;
-    ------------------------
   else do
     local dest={}; --массив полученных чисел
     local deep=1;
     errok,dest=ReadECHO68(deep); --Запрос данных с прибора
-
     if errok<=0 then return;
     end;
-
     local a=4;
     Err,timesec = time.PackTime(2000+FromBCD(dest[a+4]),FromBCD(dest[a+3]),FromBCD(dest[a+2]),FromBCD(dest[a+1]),00,00);
     ts = time.TimeToTimeStamp(timesec,0);
-
-    --server.Message( "else");
     server.WriteCurrentTag(dest[4],OPC_QUALITY_GOOD,ts);
     server.WriteCurrentTagToHda(dest[a],OPC_QUALITY_GOOD,ts)
-
     end;
-
     end;
-    --server.Message( "end err=",errok);
   end
