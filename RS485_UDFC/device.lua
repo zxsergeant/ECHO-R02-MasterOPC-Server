@@ -28,21 +28,15 @@ function OnAfterReading()
   until err>=0 or n>=server.GetCurrentDeviceRetry()
   --обработка результатов
   if err>=0 then
-    --server.Message( "err=",err," len=",len);
-    --server.Message( "dest4",dest[4],"dest5",dest[5]);
     server.WriteTagByRelativeName("Status",dest[9],OPC_QUALITY_GOOD);
     server.WriteTagByRelativeName("H",dest[4],OPC_QUALITY_GOOD);
     server.WriteTagByRelativeName("Q",dest[5]*3600,OPC_QUALITY_GOOD);
     --масштабируем значение объёма
-    --if dest[5]>=0 and dest[5]<=5 then
     dest[8] = (10^ (dest[8] - 3 ));
     dest[6] = dest[6] * dest[8];
-    --server.Message(dest[8]);
     server.WriteTagByRelativeName("U",dest[6],OPC_QUALITY_GOOD);
     server.WriteTagByRelativeName("Working_time",dest[7],OPC_QUALITY_GOOD);
-    --end;
   else
-    --server.WriteCurrentTag(0,OPC_QUALITY_BAD);
     server.WriteTagByRelativeName("Status",0,OPC_QUALITY_BAD);
     server.WriteTagByRelativeName("H",0,OPC_QUALITY_BAD);
     server.WriteTagByRelativeName("Q",0,OPC_QUALITY_BAD);
