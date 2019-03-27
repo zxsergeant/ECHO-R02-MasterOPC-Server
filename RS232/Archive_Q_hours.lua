@@ -2,7 +2,6 @@
 -- Функция приёма n строк почасового архива, начиная с i-й
 ---------------------------------------------------------------------------
 function ReadECHOi4(nlin)
-  --server.Message( "Start");
   local send={}; --массив отправляемых чисел
   table.insert(send,0xAA); --маркер начала команды
   table.insert(send,0x04); --команда
@@ -29,8 +28,6 @@ function ReadECHOi4(nlin)
     n=n+1;
     --условие выхода - корректный ответ или превышение запросов
   until err>=0 or n>=server.GetCurrentDeviceRetry()
-  --server.Message( " err=",err," len=",len);
-  --server.Message( "func err=",err);
   if err>=0 then
     --local multipler=0.1;
     local err1,multipler=GetMultipler();
@@ -38,10 +35,6 @@ function ReadECHOi4(nlin)
     local a=1;
     repeat
       dest[a]=dest[a]*multipler;
-      --server.Message( "multipler=",multipler);
-      --server.Message( " значение=",dest[a]," a=",a);
-      --server.Message( " data=",2000+FromBCD(dest[a+4]),".",FromBCD(dest[a+3]),".",FromBCD(dest[a+2]),".",FromBCD(dest[a+1]));
-
       a=a+5;
       nlin1=nlin1-1;
     until nlin1<=0
@@ -87,9 +80,7 @@ local send={}; --массив отправляемых чисел
   until err>=0 or n>=server.GetCurrentDeviceRetry()
   --обработка результатов
   if err>=0 then
-    --if dest[5]>=0 and dest[5]<=5 then
     dest[5] = (10^ (dest[5] - 3 ));
-    --server.Message( "funcmult=",dest[5]);
     return true,dest[5];
   else
     return false,0; --запрос некорректен, возвращаем соответствующий флаг
@@ -115,7 +106,6 @@ end
 
 function OnRead()
   local errok;--={}; --массив полученных чисел
-  --server.Message( "...reading");
   if read==false
   then do
     local dest={}; --массив полученных чисел
@@ -135,8 +125,6 @@ function OnRead()
       a=a+5;
       deep=deep-1;
     until deep<=0
-    --
-    --server.Message( "then");
     read=true;
     end;
     ------------------------
@@ -152,12 +140,10 @@ function OnRead()
     Err,timesec = time.PackTime(2000+FromBCD(dest[a+4]),FromBCD(dest[a+3]),FromBCD(dest[a+2]),FromBCD(dest[a+1]),00,00);
     ts = time.TimeToTimeStamp(timesec,0);
 
-    --server.Message( "else");
     server.WriteCurrentTag(dest[4],OPC_QUALITY_GOOD,ts);
     server.WriteCurrentTagToHda(dest[a],OPC_QUALITY_GOOD,ts)
 
     end;
 
     end;
-    --server.Message( "end err=",errok);
   end
